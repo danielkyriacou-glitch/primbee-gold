@@ -27,6 +27,12 @@ npm run serve
 
 The game and generated build use the original tracked PNG artwork directly from `design-assets/`. `npm run build` copies that directory into ignored `dist/` output. The optional `scripts/optimise-assets.py` utility is retained for future asset work but its generated derivatives are not tracked or used by v1. Production randomness uses `crypto.getRandomValues`; only tests/simulation use seeded RNG. If Web Crypto is absent, the documented fallback is `Math.random`.
 
+## Browser Preview
+
+The GitHub Pages workflow tests and builds the kiosk, then publishes the generated `dist/` directory. Its deployment URL appears in the repository's **Deployments** area and in the workflow run's `github-pages` environment. Every merge to `main` republishes the preview.
+
+This public preview is only for development inspection. The final Android build remains locally bundled and fully offline. Do not publish personal family photographs or videos through the preview.
+
 ### Pay rule
 
 All nine fixed lines pay left-to-right. Wild substitutes for regular symbols, never scatter. When leading wilds permit multiple results, the highest credit result wins (not symbol rank); five wilds pays 160. Line wins are added; feature line wins are doubled.

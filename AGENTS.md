@@ -1,0 +1,3 @@
+# Repository agent instructions
+
+All changes must follow `KIOSK_CONTRACT.md`. Preserve Primbee Gold paytables, reel weights, paylines, RNG, RTP, hit/free-game frequency and feature rules. Keep all production dependencies local and paths relative; never add external navigation, `window.open()`, analytics, advertising, purchases or network runtime dependencies. Keep `dist/` ignored and do not commit generated output. Do not add or modify binary assets; reuse tracked `design-assets/` PNGs unchanged. For kiosk work, test all contract viewports, persistence/recovery/navigation, build scans, tests and four deterministic simulations.

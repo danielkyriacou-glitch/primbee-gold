@@ -26,11 +26,13 @@ let freeGames = 0;
 let maxFeature = 0;
 let totalFeaturePayout = 0;
 let invalidOutcomes = 0;
+let duplicatePaylineEvaluations = 0;
 
 function lineUsesWild(result, line) {
   return line.positions.some(([reel, row]) => result.grid[reel][row] === 'wild');
 }
 function recordLines(result, free) {
+  if (new Set(result.lines.map(line => line.line)).size !== result.lines.length) duplicatePaylineEvaluations++;
   for (const line of result.lines) {
     const credits = line.payout * (free ? FEATURE.multiplier : 1);
     if (free) {
@@ -66,7 +68,7 @@ for (let index = 0; index < spins; index++) {
       if (!Number.isFinite(freeResult.payout) || freeResult.payout < 0) invalidOutcomes++;
     }
     totalFeaturePayout += featurePayout;
-    maxFeature = Math.max(maxFeature, engine.feature.total);
+    maxFeature = Math.max(maxFeature, engine.feature.played);
     engine.finishFeature();
   }
   if (!Number.isFinite(result.payout) || result.payout < 0 || engine.credits < 0) invalidOutcomes++;
@@ -106,16 +108,18 @@ const report = {
   averageFreeGamesPerPaidSpin: freeGames / spins,
   averagePayoutPerTriggeredFeature: triggers ? totalFeaturePayout / triggers : 0,
   maximumFeatureLength: maxFeature,
-  invalidOutcomes
+  invalidOutcomes,
+  duplicatePaylineEvaluations
 };
 const checks = {
   paidSpinHitFrequency: report.paidSpinHitFrequency >= 0.22 && report.paidSpinHitFrequency <= 0.26,
-  freeGamesTriggerFrequency: report.freeGamesTriggerFrequency >= 0.012 && report.freeGamesTriggerFrequency <= 0.02,
+  freeGamesTriggerFrequency: report.freeGamesTriggerFrequency >= 0.0115 && report.freeGamesTriggerFrequency <= 0.014,
   rtp: report.rtp >= 0.935 && report.rtp <= 0.965,
   oneToFourShare: report.distribution.oneToFourShare >= 0.70,
   twentyPlusShare: report.distribution.twentyPlusShare <= 0.05,
   maximumFeatureLength: report.maximumFeatureLength <= 18,
-  validOutcomes: report.invalidOutcomes === 0
+  validOutcomes: report.invalidOutcomes === 0,
+  uniquePaylineEvaluations: report.duplicatePaylineEvaluations === 0
 };
 report.validationChecks = checks;
 report.validation = Object.values(checks).every(Boolean) ? 'PASS' : 'FAIL';

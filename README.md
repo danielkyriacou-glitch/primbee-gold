@@ -35,4 +35,14 @@ This public preview is only for development inspection. The final Android build 
 
 ### Pay rule
 
-All nine fixed lines pay left-to-right. Wild substitutes for regular symbols, never scatter. When leading wilds permit multiple results, the highest credit result wins (not symbol rank); five wilds pays 160. Line wins are added; feature line wins are doubled.
+All nine fixed lines pay left-to-right. Wild substitutes for regular symbols, never scatter. When leading wilds permit multiple results, the highest credit result wins (not symbol rank); five wilds pays 200. Line wins are added; feature line wins are doubled.
+
+## Final reel, feature, presentation and recovery rules
+
+The approved regular-symbol order (common to rare) is rose, fishing boat, black swan, miner's lamp, lighthouse, pelican, sunset and steelworks. Their tuned base weights are respectively **19, 16, 15, 14, 9, 4, 1.5 and 0.4**; WILD is **0.3** and scatter is **2.7** (free games use WILD **0.45**). Approved 3/4/5 awards are: rose 1/2/5, boat 2/4/8, swan 2/5/10, lamp 3/8/15, lighthouse 5/12/25, pelican 8/20/40, sunset 12/30/60 and steelworks 20/50/100. Five WILDs pays 200.
+
+Three scatters anywhere in the visible 5×3 grid award eight free games; they need not be adjacent or on a payline, and WILD never substitutes for scatter. Every free-game line total, including WILD-assisted wins, is multiplied exactly once by two. Scatters have no cash award. Retriggers remain five with an 18-game cap.
+
+A result is calculated, credited and saved before the passing-symbol reel strips begin, then reels land left-to-right on that saved grid. Winning lines are shown sequentially and the already-credited total counts up with synchronised synthetic Web Audio coin ticks; large totals accelerate and cap at four seconds. Reduced motion lands directly and shortens presentation. SPIN skips presentation without changing credits.
+
+Storage schema 3 adds the displayed grid, lines and positions, status, feature accumulated win, doubled-win details, and the calculated pending result. Version 2 is migrated while preserving credits, sound, volume, reduced-motion and family preferences, and feature progress.

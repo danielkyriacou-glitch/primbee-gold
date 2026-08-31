@@ -1,0 +1,105 @@
+{
+  "seed": 20260833,
+  "spinCount": 250000,
+  "paidSpinHitFrequency": 0.254688,
+  "hitFrequency95CI": [
+    0.25298011208536947,
+    0.2563958879146306
+  ],
+  "freeGamesTriggerFrequency": 0.012628,
+  "totalWageredPlayCredits": 250000,
+  "totalReturnedPlayCredits": 240349,
+  "rtp": 0.961396,
+  "rtpContribution": {
+    "baseGameLineWinRtp": 0.764068,
+    "freeGamesRtp": 0.197328,
+    "totalRtp": 0.961396,
+    "baseWildRelatedRtp": 0.213664,
+    "freeGameWildRelatedRtp": 0.083504,
+    "note": "Wild-related values are subsets of their base/free line-win contributions."
+  },
+  "winningPaidSpins": 60938,
+  "distribution": {
+    "oneToFourShare": 0.8419541172995504,
+    "twentyPlusShare": 0.0043979126325117334
+  },
+  "symbolFrequencyByReel": [
+    {
+      "rose": 0.20339466666666667,
+      "lighthouse": 0.120144,
+      "wild": 0.015626666666666667,
+      "lamp": 0.16746133333333332,
+      "swan": 0.178964,
+      "boat": 0.191212,
+      "scatter": 0.033542666666666665,
+      "pelican": 0.05993333333333333,
+      "sunset": 0.023796,
+      "steelworks": 0.005925333333333334
+    },
+    {
+      "swan": 0.17920533333333333,
+      "rose": 0.20378666666666667,
+      "lamp": 0.16791333333333333,
+      "wild": 0.015433333333333334,
+      "lighthouse": 0.11967733333333333,
+      "pelican": 0.059884,
+      "boat": 0.19100933333333334,
+      "sunset": 0.023937333333333335,
+      "scatter": 0.033248,
+      "steelworks": 0.005905333333333334
+    },
+    {
+      "swan": 0.17857866666666666,
+      "boat": 0.19173066666666666,
+      "rose": 0.20396933333333334,
+      "lamp": 0.16757733333333333,
+      "pelican": 0.059756,
+      "wild": 0.015506666666666667,
+      "scatter": 0.033682666666666666,
+      "lighthouse": 0.11949866666666667,
+      "sunset": 0.023748,
+      "steelworks": 0.005952
+    },
+    {
+      "pelican": 0.05973866666666667,
+      "rose": 0.20379733333333333,
+      "boat": 0.19028533333333333,
+      "swan": 0.17873466666666665,
+      "lamp": 0.167092,
+      "sunset": 0.02407866666666667,
+      "lighthouse": 0.1207,
+      "wild": 0.015577333333333334,
+      "scatter": 0.034001333333333335,
+      "steelworks": 0.005994666666666666
+    },
+    {
+      "pelican": 0.059884,
+      "swan": 0.179636,
+      "lamp": 0.16708133333333333,
+      "lighthouse": 0.12017866666666667,
+      "rose": 0.20295466666666667,
+      "boat": 0.191588,
+      "sunset": 0.023856,
+      "scatter": 0.03344266666666667,
+      "steelworks": 0.005981333333333333,
+      "wild": 0.015397333333333334
+    }
+  ],
+  "wildFrequency": 0.015508266666666666,
+  "scatterFrequency": 0.033583466666666666,
+  "averageFreeGamesPerTrigger": 8.521064301552107,
+  "averageFreeGamesPerPaidSpin": 0.107604,
+  "averagePayoutPerTriggeredFeature": 15.62622743110548,
+  "maximumFeatureLength": 18,
+  "invalidOutcomes": 0,
+  "validationChecks": {
+    "paidSpinHitFrequency": true,
+    "freeGamesTriggerFrequency": true,
+    "rtp": true,
+    "oneToFourShare": true,
+    "twentyPlusShare": true,
+    "maximumFeatureLength": true,
+    "validOutcomes": true
+  },
+  "validation": "PASS"
+}

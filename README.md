@@ -1,151 +1,32 @@
-# 🎰 Advanced JavaScript Slot Machine
+# Primbee Gold v1
 
-A beautiful, feature-rich slot machine game with multiple paylines, configurable grid sizes, and smooth animations built with HTML5 Canvas and JavaScript.
+A completely offline, non-commercial five-reel play-credit game based on the MIT-licensed `HorrellTech/slots-js`. It uses the ten supplied Illawarra images and contains no payments, accounts, advertising, analytics, or network runtime.
 
-Wanted to create a slot machine with adjustable win rates etc, so I can gain better understanding of how they may work. Next step is adding a checker that calculates how much spent vs how much won, and adjust the win rate based on those variables.
+## Inherited architecture and v1 refactor
 
-https://horrelltech.github.io/slots-js/
+The fork arrived as a single global `SlotMachine` class (`slot-machine.js`) combining Canvas rendering, theme/symbol data, probability controls, betting, audio, free spins, and UI callbacks; `index.html`, `styles.css`, and a separate help-modal pair supplied the presentation. V1 retains the foundation's five-by-three concept, staggered-stop timing, nine line patterns, and sequential win-display concept while replacing money/bet controls and generic themes.
 
-## 🚀 New Features
+The new architecture is separated into `src/config` (symbols, weights, paytable, nine fixed lines), `src/engine` (injectable RNG, outcomes, wild and feature rules), `src/render`/`src/app.js` (responsive DOM reels and animation), `src/audio` (local Web Audio hierarchy), and `src/storage` (versioned persistence). A future Hold and Spin feature should implement the same feature-state contract beside `GameEngine.feature` and be orchestrated by `src/app.js`, without changing base evaluation.
 
-### Multiple Paylines
-- **Horizontal Lines**: Traditional left-to-right paylines
-- **Diagonal Lines**: Top-left to bottom-right and top-right to bottom-left
-- **V-Lines**: V-shaped and inverted V-shaped patterns
-- **Zigzag Lines**: Sawtooth and reverse sawtooth patterns
-- **Adjustable**: Choose how many paylines to play (1 to max available)
+## Plan implemented
 
-### Configurable Grid System
-- **Easy Grid Resizing**: Supports 3x3, 5x3, 5x4, 6x4, and custom sizes
-- **Dynamic Paylines**: Paylines adjust automatically based on grid size
-- **Independent Cells**: Each cell can hold its own symbol/image
-- **Responsive Layout**: Canvas adjusts to accommodate different grid sizes
+1. Preserve licence and attribute the foundation.
+2. Separate deterministic engine/config/storage from the responsive UI.
+3. Integrate and preload supplied art; implement blue base and gold free-game modes.
+4. Add unit, simulation, build, browser-validation scaffolding and evidence reports.
 
-### Enhanced Gameplay
-- **Multi-line Betting**: Bet per line × number of active lines
-- **Visual Paylines**: See active paylines and winning combinations
-- **Win Animation**: Flashing effects for winning paylines
-- **Staggered Reels**: Each reel stops independently for realistic feel
+## Commands
 
-## 🎮 How to Play
-
-1. **Set Your Bet**: Use +/- buttons to adjust bet per line (5-100 coins)
-2. **Choose Paylines**: Select how many paylines to play (affects total bet)
-3. **Spin**: Click "SPIN!" to play (costs: bet × paylines)
-4. **Win**: Match 3+ symbols on any active payline from left to right
-5. **Collect**: Winning combinations flash and add coins to your balance
-
-## 🛠️ Easy Customization
-
-### Grid Configuration
-```javascript
-// Quick reconfiguration
-slotMachine.reconfigure(6, 4); // 6 reels, 4 rows
-
-// Or modify in constructor
-this.config = {
-    reels: 5,           // Number of columns
-    rows: 3,            // Number of rows
-    symbolHeight: 80,   // Height of each symbol
-    symbolWidth: 100,   // Width of each symbol
-    spacing: 2          // Spacing between cells
-};
+```bash
+npm test
+npm run simulate -- --spins 1000000 --seed 20260831
+npm run build
+npm run serve
+# open http://localhost:4173
 ```
 
-### Symbol Customization
-```javascript
-this.symbols = [
-    { 
-        id: 'cherry',           // Unique identifier
-        name: '🍒',            // Display symbol (emoji or text)
-        value: 5,              // Base payout value
-        probability: 0.3,      // Appearance probability
-        color: '#ff6b6b'       // Symbol color theme
-    },
-    // Add more symbols...
-];
-```
+The game and generated build use the original tracked PNG artwork directly from `design-assets/`. `npm run build` copies that directory into ignored `dist/` output. The optional `scripts/optimise-assets.py` utility is retained for future asset work but its generated derivatives are not tracked or used by v1. Production randomness uses `crypto.getRandomValues`; only tests/simulation use seeded RNG. If Web Crypto is absent, the documented fallback is `Math.random`.
 
-### Adding Custom Paylines
-```javascript
-// Add to generatePaylines() method
-const customLine = [
-    { reel: 0, row: 0 },   // Position on grid
-    { reel: 1, row: 1 },   // reel = column, row = row
-    { reel: 2, row: 2 },   // Define any pattern you want
-    // ... more positions
-];
+### Pay rule
 
-lines.push({ 
-    id: 'custom_pattern', 
-    name: 'Custom Line', 
-    positions: customLine, 
-    type: 'custom',
-    color: '#ff0000'
-});
-```
-
-### Image Support
-To use images instead of emojis, modify the `drawSymbol()` method:
-```javascript
-// Replace emoji drawing with image drawing
-const img = new Image();
-img.src = `images/${symbol.id}.png`;
-this.ctx.drawImage(img, x, y, width, height);
-```
-
-## 📊 Payline Types
-
-| Type | Description | Pattern | Min Grid |
-|------|-------------|---------|----------|
-| Horizontal | Left to right straight lines | — — — — — | Any |
-| Diagonal | Corner to corner lines | ╲ or ╱ | 3x3+ |
-| V-Shape | Down then up pattern | ∨ | 5x3+ |
-| Inv-V | Up then down pattern | ∧ | 5x3+ |
-| Zigzag | Sawtooth patterns | ∿ | 5x3+ |
-
-## 🎯 Win Conditions
-
-- **3 Matches**: 1x symbol value × bet per line
-- **4 Matches**: 3x symbol value × bet per line  
-- **5 Matches**: 5x symbol value × bet per line
-- **Multiple Lines**: Can win on multiple paylines simultaneously
-
-## 📁 File Structure
-
-- `index.html`: Main game interface with controls
-- `slot-machine.js`: Complete game engine with payline system
-- `README.md`: Documentation and customization guide
-
-## 🔧 Configuration Examples
-
-```javascript
-// Small grid for quick games
-slotMachine.reconfigure(3, 3);  // 3 paylines max
-
-// Classic slot machine
-slotMachine.reconfigure(5, 3);  // 9 paylines max
-
-// Modern video slot
-slotMachine.reconfigure(5, 4);  // 15+ paylines
-
-// Mega slot machine
-slotMachine.reconfigure(6, 4);  // 20+ paylines
-```
-
-## 🎨 Visual Features
-
-- **Gradient Backgrounds**: Modern visual design
-- **Colored Paylines**: Each payline has a unique color
-- **Symbol Glows**: Symbols have colored glows matching their theme
-- **Win Animations**: Flashing effects for winning combinations
-- **Smooth Scrolling**: Realistic reel spinning with staggered stops
-
-## 🌐 Browser Compatibility
-
-Works in all modern browsers supporting HTML5 Canvas and ES6 classes.
-
-## 📝 License
-
-MIT License - Free to use and modify for your projects!
-Simple slot machine written in javascript using a javascript canvas
+All nine fixed lines pay left-to-right. Wild substitutes for regular symbols, never scatter. When leading wilds permit multiple results, the highest credit result wins (not symbol rank); five wilds pays 160. Line wins are added; feature line wins are doubled.

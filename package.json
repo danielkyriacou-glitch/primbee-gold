@@ -1,0 +1,16 @@
+{
+  "name": "primbee-gold",
+  "version": "1.0.0",
+  "description": "Offline Primbee Gold play-credit game",
+  "main": "help-modal.js",
+  "scripts": {
+    "test": "node --test",
+    "simulate": "node scripts/simulate.mjs",
+    "serve": "python3 -m http.server 4173",
+    "build": "node scripts/build.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module"
+}

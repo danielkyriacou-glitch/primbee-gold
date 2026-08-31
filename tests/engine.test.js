@@ -17,3 +17,8 @@ test('scatter trigger is independent of paylines',()=>{const g=Array.from({lengt
 test('free win records base and multiplier exactly once',()=>{const g=Array.from({length:5},()=>['rose','scatter','scatter']);const r=evaluateGrid(g,true);assert.equal(r.multiplier,2);assert.equal(r.payout,r.basePayout*2);});
 test('wild-assisted free win doubles exactly once',()=>{const g=Array.from({length:5},()=>['rose','scatter','scatter']);g[0][0]='wild';const r=evaluateGrid(g,true);assert.ok(r.lines.length);assert.equal(r.payout,r.basePayout*2);});
 test('scatter has no cash award to double',()=>{const g=Array.from({length:5},()=>['boat','swan','lamp']);g[0][0]=g[2][1]=g[4][2]='scatter';const r=evaluateGrid(g,true);assert.equal(r.payout,r.basePayout*2);assert.ok(!r.lines.some(x=>x.symbol==='scatter'));});
+test('nine paylines are the approved intuitive routes',()=>assert.deepEqual(PAYLINES,[
+ [0,0,0,0,0],[1,1,1,1,1],[2,2,2,2,2],[0,1,2,1,0],[2,1,0,1,2],
+ [1,0,0,0,1],[1,2,2,2,1],[0,1,1,1,0],[2,1,1,1,2]
+]));
+test('three matching symbols away from reel one do not win',()=>assert.equal(evaluateLine(['boat','rose','rose','rose','swan']),null));

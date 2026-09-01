@@ -1,27 +1,34 @@
 {
   "seed": 20260832,
   "spinCount": 250000,
-  "paidSpinHitFrequency": 0.248568,
+  "paidSpinHitFrequency": 0.334844,
   "hitFrequency95CI": [
-    0.24687384352939543,
-    0.25026215647060457
+    0.33299401126387984,
+    0.3366939887361201
   ],
   "freeGamesTriggerFrequency": 0.011868,
   "totalWageredPlayCredits": 250000,
-  "totalReturnedPlayCredits": 239803,
-  "rtp": 0.959212,
+  "totalReturnedPlayCredits": 238281,
+  "rtp": 0.953124,
   "rtpContribution": {
-    "baseGameLineWinRtp": 0.793972,
-    "freeGamesRtp": 0.16524,
-    "totalRtp": 0.959212,
-    "baseWildRelatedRtp": 0.057756,
-    "freeGameWildRelatedRtp": 0.015512,
+    "baseGameLineWinRtp": 0.790436,
+    "freeGamesRtp": 0.162688,
+    "totalRtp": 0.953124,
+    "baseWildRelatedRtp": 0.0575,
+    "freeGameWildRelatedRtp": 0.015648,
     "note": "Wild-related values are subsets of their base/free line-win contributions."
   },
-  "winningPaidSpins": 59577,
+  "winningPaidSpins": 81286,
+  "averagePayoutOnWinningPaidSpins": 2.4310336343281747,
+  "paidLineWinsByLength": {
+    "2": 1919,
+    "3": 102822,
+    "4": 20447,
+    "5": 5448
+  },
   "distribution": {
-    "oneToFourShare": 0.7858737432230559,
-    "twentyPlusShare": 0.004347315239102338
+    "oneToFourShare": 0.908840390719189,
+    "twentyPlusShare": 0.0006643210392933592
   },
   "symbolFrequencyByReel": [
     {
@@ -89,7 +96,7 @@
   "scatterFrequency": 0.03285066666666667,
   "averageFreeGamesPerTrigger": 8.53758004718571,
   "averageFreeGamesPerPaidSpin": 0.101324,
-  "averagePayoutPerTriggeredFeature": 13.923154701718907,
+  "averagePayoutPerTriggeredFeature": 13.708122682844625,
   "maximumFeatureLength": 18,
   "invalidOutcomes": 0,
   "duplicatePaylineEvaluations": 0,
@@ -97,8 +104,6 @@
     "paidSpinHitFrequency": true,
     "freeGamesTriggerFrequency": true,
     "rtp": true,
-    "oneToFourShare": true,
-    "twentyPlusShare": true,
     "maximumFeatureLength": true,
     "validOutcomes": true,
     "uniquePaylineEvaluations": true

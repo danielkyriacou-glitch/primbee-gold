@@ -1,9 +1,9 @@
 export const SYMBOLS = [
-  ['rose','Koala','koala.png'],['boat','Kookaburra','kookaburra.png'],
-  ['swan','Wombat','wombat.png'],['lamp','Kangaroo','kangaroo.png'],
-  ['lighthouse','Cockatoo','cockatoo.png'],['pelican','Platypus','platypus.png'],
-  ['sunset','Echidna','echidna.png'],['steelworks','Crocodile','crocodile.png'],
-  ['wild','Tasmanian Tiger WILD','wild-thylacine.png'],['scatter','Lorikeets FREE GAMES','free-lorikeets.png']
+  ['rose','Koala','koala.jpg'],['boat','Kookaburra','kookaburra.jpg'],
+  ['swan','Wombat','wombat.jpg'],['lamp','Kangaroo','kangaroo.jpg'],
+  ['lighthouse','Cockatoo','cockatoo.jpg'],['pelican','Platypus','platypus.jpg'],
+  ['sunset','Echidna','echidna.jpg'],['steelworks','Crocodile','crocodile.jpg'],
+  ['wild','Tasmanian Tiger WILD','wild-thylacine.jpg'],['scatter','Lorikeets FREE GAMES','free-lorikeets.jpg']
 ].map(([id,label,file])=>({id,label,file,wild:id==='wild',scatter:id==='scatter'}));
 export const PAYTABLE={rose:[1,2,3],boat:[1,2,3],swan:[1,2,4],lamp:[2,4,8],lighthouse:[2,6,12],pelican:[3,8,16],sunset:[1,5,12,25],steelworks:[2,8,20,40],wild:[0,0,100]};
 export const PAYLINES=[

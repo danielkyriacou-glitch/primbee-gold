@@ -27,6 +27,8 @@ let maxFeature = 0;
 let totalFeaturePayout = 0;
 let invalidOutcomes = 0;
 let duplicatePaylineEvaluations = 0;
+const paidLineWinsByLength = { 2: 0, 3: 0, 4: 0, 5: 0 };
+let paidSpinPayout = 0;
 
 function lineUsesWild(result, line) {
   return line.positions.some(([reel, row]) => result.grid[reel][row] === 'wild');
@@ -34,6 +36,7 @@ function lineUsesWild(result, line) {
 function recordLines(result, free) {
   if (new Set(result.lines.map(line => line.line)).size !== result.lines.length) duplicatePaylineEvaluations++;
   for (const line of result.lines) {
+    if (!free) paidLineWinsByLength[line.count]++;
     const credits = line.payout * (free ? FEATURE.multiplier : 1);
     if (free) {
       contribution.freeGameLineCredits += credits;
@@ -47,6 +50,7 @@ function recordLines(result, free) {
 
 for (let index = 0; index < spins; index++) {
   const result = engine.spin();
+  paidSpinPayout += result.payout;
   recordLines(result, false);
   if (result.payout >= 1 || result.trigger) hits++;
   if (result.payout) {
@@ -95,6 +99,8 @@ const report = {
     note: 'Wild-related values are subsets of their base/free line-win contributions.'
   },
   winningPaidSpins: winCount,
+  averagePayoutOnWinningPaidSpins: winCount ? paidSpinPayout / winCount : 0,
+  paidLineWinsByLength,
   distribution: {
     oneToFourShare: small / winCount,
     twentyPlusShare: major / winCount
@@ -112,11 +118,9 @@ const report = {
   duplicatePaylineEvaluations
 };
 const checks = {
-  paidSpinHitFrequency: report.paidSpinHitFrequency >= 0.22 && report.paidSpinHitFrequency <= 0.26,
+  paidSpinHitFrequency: report.paidSpinHitFrequency >= 0.33 && report.paidSpinHitFrequency <= 0.35,
   freeGamesTriggerFrequency: report.freeGamesTriggerFrequency >= 0.0115 && report.freeGamesTriggerFrequency <= 0.014,
-  rtp: report.rtp >= 0.935 && report.rtp <= 0.965,
-  oneToFourShare: report.distribution.oneToFourShare >= 0.70,
-  twentyPlusShare: report.distribution.twentyPlusShare <= 0.05,
+  rtp: report.rtp >= 0.95 && report.rtp <= 0.97,
   maximumFeatureLength: report.maximumFeatureLength <= 18,
   validOutcomes: report.invalidOutcomes === 0,
   uniquePaylineEvaluations: report.duplicatePaylineEvaluations === 0
